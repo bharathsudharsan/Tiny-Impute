@@ -46,8 +46,8 @@ The IoT boards used to test the three imputation algorithms over five test datas
 
 ### CircuitPython & MicroPython - IoT Boards
 
-Set up the IoT board by installing the appropriate Python implementation by following [[CircuitPython]](https://circuitpython.org/board/doit_esp32_devkit_v1/) or [MicroPython](https://youtu.be/fmgQ8Dcg9uM)
-To have an easier experience with coding and running the repo on MCUs, intall and use thonny IDE.
+Set up the IoT board by installing the appropriate Python implementation by following [[CircuitPython]](https://circuitpython.org/board/doit_esp32_devkit_v1/) or [[MicroPython]](https://youtu.be/fmgQ8Dcg9uM)
+To have an easier experience with coding and running the repo on MCUs, intall and use Thonny IDE.
 To run the expirements on IoT Board, clone this repo, copy the dataset sample (.csv files) to the board's memory, then run the (.py file) on the board.
 
 ### Jupyter Notebooks - PC / Collab
