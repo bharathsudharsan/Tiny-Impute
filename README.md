@@ -36,12 +36,10 @@ Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
 The IoT boards used to test the three imputation algorithms over five test datasets:
 
-- Arduino MKR1000: [CPU] SAMD21 Cortex-M0+ 48MHz. [Memory] Flash 256KB, SRAM 32KB [Board]()
+- Arduino MKR1000: [CPU] SAMD21 Cortex-M0+ 48MHz. [Memory] Flash 256KB, SRAM 32KB [[Board]](https://docs.arduino.cc/hardware/mkr-1000-wifi)
 
-- ESP 32 Dev Kit: [CPU] Xtensa LX6 240 MHz. [Memory] Flash 4MB, SRAM 520KB [Board]()
+- ESP 32 Dev Kit: [CPU] Xtensa LX6 240 MHz. [Memory] Flash 4MB, SRAM 520KB [[Board]](https://www.espressif.com/en/products/socs/esp32)
 
-- Raspberry Pi 4 Model B: [CPU] Cortex-A72 1.8GHz. [Memory] M-SD 16GB, SDRAM 4GB  [Board]()
-
-- Windows 10 Laptop: [CPU] Intel Core i7-4600U 2.1GHz. [Memory] SSD 250GB, SDRAM 8GB [Board]()
+- Raspberry Pi 4 Model B: [CPU] Cortex-A72 1.8GHz. [Memory] M-SD 16GB, SDRAM 4GB  [[Board]](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
 
 ## 
