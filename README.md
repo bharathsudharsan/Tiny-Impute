@@ -10,11 +10,11 @@ This algorithm is designed for MCUs and small CPU devices (like Arduino boards),
 
 ### K-Nearest Neighbors with Expectation-Maximization (KNN-EM)
 
-This algorithm is designed for edge devices (like gateways,AIoT boards, and SBCs) with processing and memory capabilities higher than MCUs. The design of this algorithm combines our highly-optimized unsupervised K-Nearest Neighbors (KNN) and Expectation-Maximization (EM) for anomaly detection and data imputation respectively [[KNN-EM.ipynb]](Imputation_Algorithms/KNN-EM.ipynb)
+This algorithm is designed for edge devices (like gateways, AIoT boards, and SBCs) with processing and memory capabilities higher than MCUs. The design of this algorithm combines our highly-optimized unsupervised K-Nearest Neighbors (KNN) and Expectation-Maximization (EM) for anomaly detection and data imputation respectively [[KNN-EM.ipynb]](Imputation_Algorithms/KNN-EM.ipynb)
 
 ### Optimized Laplacian Convolutional Representation (LCR-Opt)
 
-Here, we deeply modify and optimize a top-performing and high-resource consuming (LCR) method, that imputes missing data using a low-rank approximation model complemented by regularization techniques. To check this algorithm for MCUs [LCR-Opt-for-IoT-Boards.ipynb](Imputation_Algorithms/LCR-Opt-for-IoT-Boards.ipynb). For the same code working on CPU devices [[LCR-Opt_for_RPi_and_Laptop.ipynb]](Imputation_Algorithms/LCR-Opt_for_RPi_and_Laptop.ipynb)
+Here, we deeply modified and optimized a top-performing and high-resource consuming (LCR) method, that imputes missing data using a low-rank approximation model complemented by regularization techniques. To check this algorithm for MCUs [[LCR-Opt-for-IoT-Boards.ipynb]](Imputation_Algorithms/LCR-Opt-for-IoT-Boards.ipynb). For the same code working on CPU devices [[LCR-Opt_for_RPi_and_Laptop.ipynb]](Imputation_Algorithms/LCR-Opt_for_RPi_and_Laptop.ipynb)
 
 ## Datasets:
 
