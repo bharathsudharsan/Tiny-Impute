@@ -1,5 +1,7 @@
 # Tiny-Impute: On-device Hybrid Anomaly Detection and Data Imputation
 
+
+
 ## Imputation Algorithms
 
 Summary of the three hybrid anomaly detection and data imputation Algorithms:
@@ -32,6 +34,12 @@ Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
 ## Testing on IoT Boards
 
-IoT boards used to test the 3 imputation algorithms over 5 test datasets:
+The IoT boards used to test the 3 imputation algorithms over 5 test datasets:
 
+- Arduino MKR1000 [Board]()
 
+- ESP 32 Dev Kit [Board]()
+
+- Raspberry Pi [Board]()
+
+## 
