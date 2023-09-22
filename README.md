@@ -1,6 +1,6 @@
 # Tiny-Impute: On-device Hybrid Anomaly Detection and Data Imputation
 
-## Imputation Algorithms:
+## Imputation Algorithms
 
 Summary of the three hybrid anomaly detection and data imputation Algorithms:
 
@@ -16,7 +16,7 @@ This algorithm is designed for edge devices (like gateways, AIoT boards, and SBC
 
 Here, we deeply modified and optimized a top-performing and high-resource consuming (LCR) method, that imputes missing data using a low-rank approximation model complemented by regularization techniques. To check this algorithm for MCUs [[LCR-Opt-for-IoT-Boards.ipynb]](Imputation_Algorithms/LCR-Opt-for-IoT-Boards.ipynb). For the same code working on CPU devices [[LCR-Opt_for_RPi_and_Laptop.ipynb]](Imputation_Algorithms/LCR-Opt_for_RPi_and_Laptop.ipynb)
 
-## Datasets:
+## Test Datasets
 
 Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
@@ -29,4 +29,9 @@ Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 - Daily and Sports Activities: The dataset comprises motion sensor data of 19 daily and sports activities each performed by 8 subjects in their own style for 5 minutes [[Original Dataset]](https://archive.ics.uci.edu/dataset/256/daily+and+sports+activities) [[Test Samples]](Datasets_Sample/Daily_Sports_Activities_Sample.csv)
 
 - Urban Observatory - CO: Carbon Monoxide (CO) data taken from the Urban Observatory, Newcastle University [[Original Dataset]](https://data.ncl.ac.uk/collections/Urban_Observatory_Data_Newcastle/5059913)
+
+## Testing on IoT Boards
+
+IoT boards used to test the 3 imputation algorithms over 5 test datasets:
+
 
