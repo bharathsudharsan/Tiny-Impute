@@ -32,10 +32,8 @@ Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
 - Urban Observatory - CO: Carbon Monoxide (CO) data taken from the Urban Observatory, Newcastle University [[Original Dataset]](https://data.ncl.ac.uk/collections/Urban_Observatory_Data_Newcastle/5059913)
 
+## IoT Boards
 
-## Imputation Experiments
-
-### IoT Boards
 The IoT boards used to test the three imputation algorithms over five test datasets:
 
 - Arduino MKR1000: [CPU] SAMD21 Cortex-M0+ 48MHz. [Memory] Flash 256KB, SRAM 32KB [[Board]](https://docs.arduino.cc/hardware/mkr-1000-wifi)
@@ -44,4 +42,14 @@ The IoT boards used to test the three imputation algorithms over five test datas
 
 - Raspberry Pi 4 Model B: [CPU] Cortex-A72 1.8GHz. [Memory] M-SD 16GB, SDRAM 4GB  [[Board]](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
 
-### Laptop
+## Imputation Experiments
+
+### CircuitPython & MicroPython - IoT Boards
+
+Set up the IoT board by installing the appropriate Python implementation by following [[CircuitPython]](https://circuitpython.org/board/doit_esp32_devkit_v1/) or [MicroPython](https://youtu.be/fmgQ8Dcg9uM)
+To have an easier experience with coding and running the repo on MCUs, intall and use thonny IDE.
+To run the expirements on IoT Board, clone this repo, copy the dataset sample (.csv files) to the board's memory, then run the (.py file) on the board.
+
+### Jupyter Notebooks - PC / Collab
+
+To run the expirements on local PC, clone this repo, open the algorithm of choice (.ipynb files), run all cells in sequence.  
