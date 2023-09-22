@@ -16,7 +16,7 @@ This algorithm is designed for edge devices (like gateways,AIoT boards, and SBCs
 
 Here, we deeply modify and optimize a top-performing and high-resource consuming (LCR) method, that imputes missing data using a low-rank approximation model complemented by regularization techniques. To check this algorithm for MCUs [LCR-Opt-for-IoT-Boards.ipynb](Imputation_Algorithms/LCR-Opt-for-IoT-Boards.ipynb). For the same code working on CPU devices [[LCR-Opt_for_RPi_and_Laptop.ipynb]](Imputation_Algorithms/LCR-Opt_for_RPi_and_Laptop.ipynb)
 
-### Datasets:
+## Datasets:
 
 Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
