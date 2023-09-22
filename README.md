@@ -32,8 +32,10 @@ Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
 - Urban Observatory - CO: Carbon Monoxide (CO) data taken from the Urban Observatory, Newcastle University [[Original Dataset]](https://data.ncl.ac.uk/collections/Urban_Observatory_Data_Newcastle/5059913)
 
-## Testing on IoT Boards
 
+## Imputation Experiments
+
+### IoT Boards
 The IoT boards used to test the three imputation algorithms over five test datasets:
 
 - Arduino MKR1000: [CPU] SAMD21 Cortex-M0+ 48MHz. [Memory] Flash 256KB, SRAM 32KB [[Board]](https://docs.arduino.cc/hardware/mkr-1000-wifi)
@@ -42,4 +44,4 @@ The IoT boards used to test the three imputation algorithms over five test datas
 
 - Raspberry Pi 4 Model B: [CPU] Cortex-A72 1.8GHz. [Memory] M-SD 16GB, SDRAM 4GB  [[Board]](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)
 
-## 
+### Laptop
