@@ -34,7 +34,7 @@ Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
 ## Testing on IoT Boards
 
-The IoT boards used to test the 3 imputation algorithms over 5 test datasets:
+The IoT boards used to test the three imputation algorithms over five test datasets:
 
 - Arduino MKR1000: [CPU] SAMD21 Cortex-M0+ 48MHz. [Memory] Flash 256KB, SRAM 32KB [Board]()
 
