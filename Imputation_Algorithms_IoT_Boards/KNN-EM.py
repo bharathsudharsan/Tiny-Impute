@@ -1,173 +1,165 @@
+import math
 import random
-import os
 import time
 
-def read_csv(file_name: str, num_rows_to_read: Union[int, None] = None) -> List[float]:
+def read_csv(file_name: str, num_rows_to_read: Optional[int] = None) -> List[float]:
     """
-    Read data from a CSV file and return it as a list of floats.
+    Reads a CSV file and returns a list of float values.
 
     Args:
-        file_name (str): The path to the CSV file to read.
-        num_rows_to_read (int, optional): The number of rows to read from the CSV file. If None, all rows are read.
+        file_name (str): The name of the CSV file to read.
+        num_rows_to_read (int, optional): The number of rows to read from the CSV file. If not specified, reads all rows.
 
     Returns:
-        List[float]: A list containing the parsed floating-point values from the CSV file.
-
-    Raises:
-        FileNotFoundError: If the specified file does not exist.
+        List[float]: A list of float values from the CSV file.
     """
     data = []
-    try:
-        with open(file_name, 'r') as f:
-            lines = f.readlines()[1:]
-            for i, line in enumerate(lines):
-                if num_rows_to_read is not None and i >= num_rows_to_read:
-                    break
-                row = float(line.strip())
-                data.append(row)
-    except FileNotFoundError as e:
-        raise FileNotFoundError(f"File not found: {file_name}") from e
-
+    with open(file_name, 'r') as f:
+        lines = f.readlines()[1:]
+        for i, line in enumerate(lines):
+            if num_rows_to_read is not None and i >= num_rows_to_read:
+                break
+            row = float(line.strip())
+            data.append(row)
     return data
 
-def euclidean_distance(x1: float, x2: float) -> float:
+def calculate_rmse(original_data: List[float], imputed_data: List[float]) -> float:
     """
-    Calculate the Euclidean distance between two numbers.
+    Calculates the Root Mean Square Error (RMSE) between two lists of float values.
 
     Args:
-        x1 (float): The first number.
-        x2 (float): The second number.
+        original_data (List[float]): The list of original data values.
+        imputed_data (List[float]): The list of imputed data values.
 
     Returns:
-        float: The Euclidean distance between x1 and x2.
+        float: The RMSE between the original and imputed data.
     """
-    return abs(x1 - x2)
+    n = len(original_data)
+    squared_errors = [(original - imputed) ** 2 for original, imputed in zip(original_data, imputed_data)]
+    mean_squared_error = sum(squared_errors) / n
+    rmse = math.sqrt(mean_squared_error)
+    return rmse
 
-def knn(data: List[float], k: int, threshold: float) -> List[float]:
+def calculate_mae(original_data: List[float], imputed_data: List[float]) -> float:
     """
-    Find outliers in a list of data using the k-nearest neighbors (KNN) algorithm.
-
-    Args:
-        data (List[float]): The list of data points.
-        k (int): The number of nearest neighbors to consider.
-        threshold (float): The threshold value to determine outliers.
-        
-    Returns:
-        List[float]: A list of outlier values.
-    """
-    data.sort()
-    outliers = []
-    for i in range(len(data)):
-        distances = [(euclidean_distance(data[i], data[j]), j) for j in range(len(data)) if j != i]
-        distances.sort(key=lambda x: x[0])
-        if distances[k-1][0] > threshold:
-            outliers.append(data[i])
-
-    return outliers
-
-def remove_outliers(dataset: List[Union[float, None]], outliers: List[float]) -> None:
-    """
-    Remove outliers from a dataset by replacing them with None.
+    Calculates the Mean Absolute Error (MAE) between two lists of float values.
 
     Args:
-        dataset (List[Union[float, None]]): The dataset containing data points.
-        outliers (List[float]): A list of outlier values to be removed.
-    """
-    for number in outliers:
-        while number in dataset:
-            index = dataset.index(number)
-            dataset[index] = None
-            
-def introduce_missingness(data: List[Union[float, None]], missingness_percentage: float) -> List[Union[float, None]]:
-    """
-    Introduce missingness into a list of data points.
-
-    Args:
-        data (List[Union[float, None]]): The list of data points.
-        missingness_percentage (float): The percentage of data points to set as missing (None).
+        original_data (List[float]): The list of original data values.
+        imputed_data (List[float]): The list of imputed data values.
 
     Returns:
-        List[Union[float, None]]: A list of data points with missing values (None).
+        float: The MAE between the original and imputed data.
+    """
+    n = len(original_data)
+    absolute_errors = [abs(original - imputed) for original, imputed in zip(original_data, imputed_data)]
+    mae = sum(absolute_errors) / n
+    return mae
+
+def introduce_missingness(data: List[float], missingness_percentage: float) -> List[float]:
+    """
+    Introduces missingness into a list of data.
+
+    Args:
+        data (List[float]): The list of data.
+        missingness_percentage (float): The percentage of missing values to introduce.
+
+    Returns:
+        List[float]: The list of data with missing values introduced.
     """
     num_missing = int(len(data) * missingness_percentage / 100)
     missing_indices = []
+
     while len(missing_indices) < num_missing:
         r = random.randint(0, len(data) - 1)
         if r not in missing_indices:
             missing_indices.append(r)
+
     for i in missing_indices:
-        data[i] = None
+        data[i] = 0
+
     return data
 
-def calculate_mean_variance(data: List[Union[float, None]], weights: List[float]) -> Tuple[float, float]:
+def moving_average(data: List[float], window_size: int) -> List[float]:
     """
-    Calculate the mean and variance of data points with weights.
+    Calculates the moving average of a list of data.
 
     Args:
-        data (List[Union[float, None]]): The list of data points (including missing values as None).
-        weights (List[float]): The list of weights corresponding to data points.
+        data (List[float]): The input data.
+        window_size (int): The size of the moving window.
 
     Returns:
-        Tuple[float, float]: A tuple containing the mean and variance of the data.
+        List[float]: The moving average of the data.
     """
-    n = len(data)
-    mean = sum(w * x for x, w in zip(data, weights)) / n
-    variance = sum(w * (x - mean)**2 for x, w in zip(data, weights)) / n
-    return mean, variance
+    return [sum([x for x in data[i:i+window_size] if x != 0]) / window_size for i in range(len(data) - window_size + 1)]
 
-def em_imputation(data: List[Union[float, None]], num_iterations: int) -> List[Union[float, None]]:
+def standard_deviation(data: List[float], window_size: int) -> List[float]:
     """
-    Perform Expectation-Maximization (EM) imputation to fill in missing values in a list of data points.
+    Calculates the standard deviation within a moving window of data.
 
     Args:
-        data (List[Union[float, None]]): The list of data points with missing values represented as None.
-        num_iterations (int): The number of EM iterations to perform.
+        data (List[float]): The input data.
+        window_size (int): The size of the moving window.
 
     Returns:
-        List[Union[float, None]]: A list of data points with missing values imputed.
+        List[float]: The standard deviation within the moving window.
     """
-    non_missing_data = [x for x in data if x is not None]
-    mean, variance = calculate_mean_variance(non_missing_data, [1] * len(non_missing_data))
+    avg = moving_average(data, window_size)
+    variance = [sum([(x - avg[i])**2 for x in data[i:i+window_size] if x != 0]) / window_size for i in range(len(data) - window_size + 1)]
+    return [var**0.5 for var in variance]
 
-    for _ in range(num_iterations):
-        estimated_data = [x if x is not None else mean for x in data]
-        mean, variance = calculate_mean_variance(estimated_data, [1] * len(estimated_data))
-
-    imputed_data = [x if x is not None else mean for x in data]
-    return imputed_data
-
-def calculate_rmse(actual: List[float], predicted: List[float]) -> float:
+def detect_outliers(data: List[float], window_size: int, z_thresh: float) -> List[int]:
     """
-    Calculate the Root Mean Squared Error (RMSE) between actual and predicted values.
+    Detects outliers within a moving window of data based on a z-score threshold.
 
     Args:
-        actual (List[float]): The list of actual values.
-        predicted (List[float]): The list of predicted values.
+        data (List[float]): The input data.
+        window_size (int): The size of the moving window.
+        z_thresh (float): The z-score threshold for outlier detection.
 
     Returns:
-        float: The RMSE value.
+        List[int]: The indices of detected outliers.
     """
-    n = len(actual)
-    squared_errors = [(a - p) ** 2 for a, p in zip(actual, predicted)]
-    mean_squared_error = sum(squared_errors) / n
-    rmse = mean_squared_error ** 0.5
-    return rmse
+    outliers = []
+    avg = moving_average(data, window_size)
+    std_dev = standard_deviation(data, window_size)
+    
+    for i in range(len(data) - window_size + 1):
+        if data[i + window_size - 1] != 0 and abs(data[i + window_size - 1] - avg[i]) > z_thresh * std_dev[i]:
+            outliers.append(i + window_size - 1)
+            data[i + window_size - 1] = 0
+    return outliers
 
-def calculate_mae(actual: List[float], predicted: List[float]) -> float:
+def SLR_impute(data: List[Union[float, int]]) -> List[Union[float, int]]:
     """
-    Calculate the Mean Absolute Error (MAE) between actual and predicted values.
+    Performs Simple Linear Regression (SLR) imputation to fill in missing values in a list of data.
 
     Args:
-        actual (List[float]): The list of actual values.
-        predicted (List[float]): The list of predicted values.
+        data (List[Union[float, int]]): The input data with some missing values (0).
 
     Returns:
-        float: The MAE value.
+        List[Union[float, int]]: The data with missing values imputed using SLR.
     """
-    n = len(actual)
-    absolute_errors = [abs(a - p) for a, p in zip(actual, predicted)]
-    mae = sum(absolute_errors) / n
-    return mae
+    known_data = [(i, d) for i, d in enumerate(data) if d != 0]
+    missing_indices = [i for i, d in enumerate(data) if d == 0]
+
+    if not known_data or not missing_indices:
+        return data
+
+    x_known, y_known = zip(*known_data)
+
+    # Compute coefficients for linear regression
+    n = len(x_known)
+    m_x, m_y = sum(x_known) / n, sum(y_known) / n
+    ss_xy = sum(y_known[i] * x_known[i] for i in range(n)) - n * m_y * m_x
+    ss_xx = sum(x_known[i] * x_known[i] for i in range(n)) - n * m_x * m_x
+    b_1 = ss_xy / ss_xx
+    b_0 = m_y - b_1 * m_x
+
+    for i in missing_indices:
+        data[i] = b_0 + b_1 * i
+
+    return data
 
 # Batch size for data processing
 batch_size=20
@@ -175,32 +167,26 @@ batch_size=20
 # Percentage of missingness in the data
 missingness_percentage = 20
 
-# Number of iterations for EM imputation
-num_iterations = 50
-
-# Value of k for k-nearest neighbors
-k = 3
-
-# Threshold value for outlier detection
-threshold = 2.0
-
 # Read dataset Sample
 file_name='Gesture_Phase_Segmentation_Sample.csv'
 original_data = read_csv(file_name,batch_size)
-raw_data=original_data
 
 # Measure the start time for execution time calculation
 start_time = time.monotonic()
 
-# Detect outliers using k-nearest neighbors (KNN) with specified k and threshold
-outliers = knn(raw_data, k, threshold)
-remove_outliers(raw_data, outliers)
+# Value of window_size and z_threshold for Moving Averages
+window_size = 5
+z_thresh = 2
+
+# Detect outliers using Moving Averages and the specified variables
+outliers = detect_outliers(original_data, window_size, z_thresh)
 
 # Introduce missingness into the data with specified missingness percentage
-data_with_missingness = introduce_missingness(raw_data.copy(), missingness_percentage)
- 
-# Perform EM imputation with the specified number of iterations
-imputed_data = em_imputation(data_with_missingness, num_iterations)
+raw_data = introduce_missingness(original_data[:], missingness_percentage)
+data = [float(item) for item in raw_data]
+
+# Perform SLR imputation
+imputed_data = SLR_impute(data)
 
 # Measure the end time for execution time calculation
 end_time = time.monotonic()
@@ -217,3 +203,4 @@ mae = calculate_mae(original_data, imputed_data)
 print(f'Execution time: {elapsed_time_ms} ms')
 print(f'RMSE: {rmse}')
 print(f'MAE: {mae}')
+

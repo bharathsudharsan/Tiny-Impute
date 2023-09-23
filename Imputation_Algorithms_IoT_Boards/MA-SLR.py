@@ -174,16 +174,16 @@ original_data = read_csv(file_name,batch_size)
 # Measure the start time for execution time calculation
 start_time = time.monotonic()
 
-# Introduce missingness into the data with specified missingness percentage
-raw_data = introduce_missingness(original_data[:], missingness_percentage)
-data = [float(item) for item in raw_data]
-
 # Value of window_size and z_threshold for Moving Averages
 window_size = 5
 z_thresh = 2
 
 # Detect outliers using Moving Averages and the specified variables
-outliers = detect_outliers(data, window_size, z_thresh)
+outliers = detect_outliers(original_data, window_size, z_thresh)
+
+# Introduce missingness into the data with specified missingness percentage
+raw_data = introduce_missingness(original_data[:], missingness_percentage)
+data = [float(item) for item in raw_data]
 
 # Perform SLR imputation
 imputed_data = SLR_impute(data)
