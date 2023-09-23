@@ -2,7 +2,8 @@ import math
 import random
 import time
 
-def read_csv(file_name: str, num_rows_to_read: Optional[int] = None) -> List[float]:
+
+def read_csv(file_name: str, num_rows_to_read=None):
     """
     Reads a CSV file and returns a list of float values.
 
@@ -23,7 +24,8 @@ def read_csv(file_name: str, num_rows_to_read: Optional[int] = None) -> List[flo
             data.append(row)
     return data
 
-def calculate_rmse(original_data: List[float], imputed_data: List[float]) -> float:
+
+def calculate_rmse(original_data, imputed_data) -> float:
     """
     Calculates the Root Mean Square Error (RMSE) between two lists of float values.
 
@@ -40,7 +42,8 @@ def calculate_rmse(original_data: List[float], imputed_data: List[float]) -> flo
     rmse = math.sqrt(mean_squared_error)
     return rmse
 
-def calculate_mae(original_data: List[float], imputed_data: List[float]) -> float:
+
+def calculate_mae(original_data, imputed_data) -> float:
     """
     Calculates the Mean Absolute Error (MAE) between two lists of float values.
 
@@ -56,7 +59,8 @@ def calculate_mae(original_data: List[float], imputed_data: List[float]) -> floa
     mae = sum(absolute_errors) / n
     return mae
 
-def introduce_missingness(data: List[float], missingness_percentage: float) -> List[float]:
+
+def introduce_missingness(data, missingness_percentage: float):
     """
     Introduces missingness into a list of data.
 
@@ -80,7 +84,8 @@ def introduce_missingness(data: List[float], missingness_percentage: float) -> L
 
     return data
 
-def moving_average(data: List[float], window_size: int) -> List[float]:
+
+def moving_average(data, window_size: int):
     """
     Calculates the moving average of a list of data.
 
@@ -91,9 +96,11 @@ def moving_average(data: List[float], window_size: int) -> List[float]:
     Returns:
         List[float]: The moving average of the data.
     """
-    return [sum([x for x in data[i:i+window_size] if x != 0]) / window_size for i in range(len(data) - window_size + 1)]
+    return [sum([x for x in data[i:i + window_size] if x != 0]) / window_size for i in
+            range(len(data) - window_size + 1)]
 
-def standard_deviation(data: List[float], window_size: int) -> List[float]:
+
+def standard_deviation(data, window_size: int):
     """
     Calculates the standard deviation within a moving window of data.
 
@@ -105,10 +112,12 @@ def standard_deviation(data: List[float], window_size: int) -> List[float]:
         List[float]: The standard deviation within the moving window.
     """
     avg = moving_average(data, window_size)
-    variance = [sum([(x - avg[i])**2 for x in data[i:i+window_size] if x != 0]) / window_size for i in range(len(data) - window_size + 1)]
-    return [var**0.5 for var in variance]
+    variance = [sum([(x - avg[i]) ** 2 for x in data[i:i + window_size] if x != 0]) / window_size for i in
+                range(len(data) - window_size + 1)]
+    return [var ** 0.5 for var in variance]
 
-def detect_outliers(data: List[float], window_size: int, z_thresh: float) -> List[int]:
+
+def detect_outliers(data, window_size: int, z_thresh: float):
     """
     Detects outliers within a moving window of data based on a z-score threshold.
 
@@ -123,14 +132,15 @@ def detect_outliers(data: List[float], window_size: int, z_thresh: float) -> Lis
     outliers = []
     avg = moving_average(data, window_size)
     std_dev = standard_deviation(data, window_size)
-    
+
     for i in range(len(data) - window_size + 1):
         if data[i + window_size - 1] != 0 and abs(data[i + window_size - 1] - avg[i]) > z_thresh * std_dev[i]:
             outliers.append(i + window_size - 1)
             data[i + window_size - 1] = 0
     return outliers
 
-def SLR_impute(data: List[Union[float, int]]) -> List[Union[float, int]]:
+
+def SLR_impute(data):
     """
     Performs Simple Linear Regression (SLR) imputation to fill in missing values in a list of data.
 
@@ -161,15 +171,16 @@ def SLR_impute(data: List[Union[float, int]]) -> List[Union[float, int]]:
 
     return data
 
+
 # Batch size for data processing
-batch_size=20
+batch_size = 20
 
 # Percentage of missingness in the data
 missingness_percentage = 20
 
 # Read dataset Sample
-file_name='Gesture_Phase_Segmentation_Sample.csv'
-original_data = read_csv(file_name,batch_size)
+file_name = 'Gesture_Phase_Segmentation_Sample.csv'
+original_data = read_csv(file_name, batch_size)
 
 # Measure the start time for execution time calculation
 start_time = time.monotonic()
