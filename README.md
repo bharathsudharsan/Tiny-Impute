@@ -4,7 +4,7 @@
 
 ## Imputation Algorithms
 
-Summary of the three hybrid anomaly detection and data imputation Algorithms:
+Summary of the 3 hybrid anomaly detection and data imputation Algorithms:
 
 ### Moving Average with Simple Linear Regression (MA-SLR)
 
@@ -33,7 +33,7 @@ Datasets used to test Tiny-Impute algorithms MA-SLR, KNN-EM, LCR-Opt:
 
 ## IoT Boards
 
-The IoT boards used to test the three imputation algorithms over five test datasets:
+The IoT boards used to test the 3 imputation algorithms over 5 test datasets:
 
 - Arduino MKR1000: [CPU] SAMD21 Cortex-M0+ 48MHz. [Memory] Flash 256KB, SRAM 32KB [[Board]](https://docs.arduino.cc/hardware/mkr-1000-wifi)
 
