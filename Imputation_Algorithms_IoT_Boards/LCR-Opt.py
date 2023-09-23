@@ -17,7 +17,7 @@ def compute_mae(predictions, targets):
         float: The MAE.
     """
     temp = abs(predictions - targets)
-    mae = (np.mean(temp, axis=0)[0])/10
+    mae = (0.01*np.mean(temp, axis=0)[0]) 
     return mae
 
 def compute_rmse(predictions, targets):
@@ -33,7 +33,7 @@ def compute_rmse(predictions, targets):
     """
     squared_diff = (predictions - targets) ** 2
     mean_squared_diff = np.mean(squared_diff, axis=0)[0]
-    rmse = (np.sqrt(mean_squared_diff))/10
+    rmse = (0.01*np.sqrt(mean_squared_diff))
     return rmse
 
 def laplacian(n: int, tau: int) -> np.ndarray:
